@@ -1,0 +1,270 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// EDGE_taskgraph.txt :
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  SYNOPSIS     : Edge baseband task graph
+//  AUTHOR       : Alan Su, OddPoint
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 24th 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//           Functional components are of 5 types:
+//           1. TaskGraph         : AS_TaskGraphC
+//           2. Task              : AS_TaskC
+//           3. TaskPort          : AS_TaskPortC
+//           4. Connection        : AS_ConnC
+//           5. Iteration blocks  : AS_ItrblkC
+//           6. Task lists        : AS_TaskListC
+//           
+//           The keyword 'null' shall be used to denote an absent attribute
+//
+// ------------------------------------------------------------------------------- //
+//                                                                            Edge
+// Comments : EDGE basestation task graph
+// ------------------------------------------------------------------------------- //
+TaskGraph,Edge,PLANAR,2308000,577000
+IN,TR_BB_IF,1400
+IN,RX_IF,19200
+IN,BB_BB_Out_IF,2800
+OUT,BB_TR_IF,1400
+OUT,TX_IF,2800
+OUT,BB_BB_In_IF,2800
+// ------------------------------------------------------------------------------- //
+//                                                                           Tasks
+// ------------------------------------------------------------------------------- //
+//
+// Task : 1_1_TR_BB_IF_Handling
+//
+Task,1_1_TR_BB_IF_Handling,TR_BB_IF_Handling,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+TR_BB_IF_Handling
+//
+// Task : 1_2_Conv_Encoding
+//
+Task,1_2_Conv_Encoding,Conv_Encoding,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+Conv_Encoding
+//
+// Task : 1_3_Block_Encoding
+//
+Task,1_3_Block_Encoding,Block_Encoding,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+Block_Encoding
+//
+// Task : 1_4_Interleaving
+//
+Task,1_4_Interleaving,Interleaving,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+Interleaving
+//
+// Task : 3_1_Burst_Formatting
+//
+Task,3_1_Burst_Formatting,Burst_Formatting,ATOMIC,0
+IN,A,1400/N
+OUT,Result,1400/N
+Burst_Formatting
+//
+// Task : 3_2_Ciphering
+//
+Task,3_2_Ciphering,Ciphering,ATOMIC,0
+IN,A,1400/N
+OUT,Result,1400/N
+Ciphering
+//
+// Task : 3_3_BB_BB_IF_Handling
+//
+Task,3_3_BB_BB_IF_Handling,BB_BB_IF_Handling,ATOMIC,0
+IN,A,1400/N
+OUT,Result,1400/N
+BB_BB_IF_Handling
+//
+// Task : 7_BB_BB_IF_Handling
+//
+Task,7_BB_BB_IF_Handling,BB_BB_IF_Handling_and_DL_IF_Unit,ATOMIC,0
+IN,A,2800
+OUT,Result,2800
+BB_BB_IF_Handling_and_DL_IF_Unit
+//
+// Task : 5_Deciphering
+//
+Task,5_Deciphering,Deciphering,ATOMIC,0
+IN,A,700
+OUT,Result,2800
+Deciphering
+//
+// Task : 2_1_Deinterleaving
+//
+Task,2_1_Deinterleaving,Deinterleaving,ATOMIC,0
+IN,A,11200
+OUT,Result,11200
+Deinterleaving
+//
+// Task : 2_2_Viterbi_Decoding
+//
+Task,2_2_Viterbi_Decoding,Viterbi_Decoding,ATOMIC,0
+IN,A,11200
+OUT,Result,1400
+Viterbi_Decoding
+//
+// Task : 2_3_Block_Decoding
+//
+Task,2_3_Block_Decoding,Block_Decoding,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+Block_Decoding
+//
+// Task : 2_4_BB_TR_IF_Handling
+//
+Task,2_4_BB_TR_IF_Handling,TR_BB_IF_Handling,ATOMIC,0
+IN,A,1400
+OUT,Result,1400
+TR_BB_IF_Handling
+//
+// Task : 6_Downlink_Interface_Unit
+//
+Task,6_Downlink_Interface_Unit,BB_BB_IF_Handling_and_DL_IF_Unit,ATOMIC,0
+IN,A,2800
+OUT,Result,2800
+BB_BB_IF_Handling_and_DL_IF_Unit
+//
+// Task : 4_1_RX_IF_Handling
+//
+Task,4_1_RX_IF_Handling,RX_IF_Handling,ATOMIC,0
+IN,A,19200
+OUT,Result,19200
+RX_IF_Handling
+//
+// Task : 4_2_Pre_Processing
+//
+Task,4_2_Pre_Processing,Pre_Processing,ATOMIC,0
+IN,A,19200
+OUT,Result1,19200
+OUT,Result2,3300
+Pre_Processing
+//
+// Task : 4_3_Channel_Noise_Est_and_Blind_Detec
+//
+Task,4_3_Channel_Noise_Est_and_Blind_Detec,Channel_Noise_Est_and_Blind_Detec,ATOMIC,0
+IN,A,3300
+OUT,Result1,250
+OUT,Result2,250
+Channel_Noise_Est_and_Blind_Detec
+//
+// Task : 4_4_AFC
+//
+Task,4_4_AFC,AFC,ATOMIC,0
+IN,A,19200
+IN,B,250
+OUT,Result,19200
+AFC
+//
+// Task : 4_5_Pre_Tap_Calculation
+//
+Task,4_5_Pre_Tap_Calculation,Pre_Tap_Calculation,ATOMIC,0
+IN,A,250
+OUT,Result,900
+Pre_Tap_Calculation
+//
+// Task : 4_6_Filter
+//
+Task,4_6_Filter,Filter,ATOMIC,0
+IN,A,128
+IN,B,3
+IN,C,6
+OUT,Result,64
+Filter
+//
+// Task : 4_7_Equalize
+//
+Task,4_7_Equalize,Equalize,ATOMIC,0
+IN,A,64
+OUT,Result,24
+Equalize
+//
+// Task : 4_8_DFE_Adaption
+//
+Task,4_8_DFE_Adaption,DFE_Adaption,ATOMIC,0
+IN,A,24
+OUT,Result1,3
+OUT,Result2,18
+DFE_Adaption
+//
+// Task : Delay1
+//
+Task,Delay1,Delay,DELAY,1
+IN,A,3
+OUT,Result,3
+Delay
+//
+// Task : 4_9_BB_BB_IF_Handling
+//
+Task,4_9_BB_BB_IF_Handling,BB_BB_IF_Handling_and_DL_IF_Unit,ATOMIC,0
+IN,A,2800
+OUT,Result,2800
+BB_BB_IF_Handling_and_DL_IF_Unit
+// ------------------------------------------------------------------------------- //
+//                                                                     Connections
+// Comment : Connect,<srcname>:<srcport>,<snkname>:<snkport>
+// ------------------------------------------------------------------------------- //
+//
+// Incoming connections to TaskGraph
+//
+Connect,Edge:TR_BB_IF,1_1_TR_BB_IF_Handling:A
+Connect,Edge:BB_BB_Out_IF,7_BB_BB_IF_Handling:A
+Connect,Edge:RX_IF,4_1_RX_IF_Handling:A
+Connect,Edge:BB_BB_Out_IF,6_Downlink_Interface_Unit:A
+//
+// Outgoing connections from TaskGraph
+//
+Connect,2_4_BB_TR_IF_Handling:Result,Edge:BB_TR_IF
+Connect,3_3_BB_BB_IF_Handling:Result,Edge:BB_BB_In_IF
+Connect,4_9_BB_BB_IF_Handling:Result,Edge:BB_BB_In_IF
+Connect,6_Downlink_Interface_Unit:Result,Edge:TX_IF
+//
+// Internal connections of Taskgraph
+//
+Connect,1_1_TR_BB_IF_Handling:Result,1_2_Conv_Encoding:A
+Connect,1_2_Conv_Encoding:Result,1_3_Block_Encoding:A
+Connect,1_3_Block_Encoding:Result,1_4_Interleaving:A
+Connect,1_4_Interleaving:Result,3_1_Burst_Formatting:A
+Connect,3_1_Burst_Formatting:Result,3_2_Ciphering:A
+Connect,3_2_Ciphering:Result,3_3_BB_BB_IF_Handling:A
+//
+Connect,7_BB_BB_IF_Handling:Result,5_Deciphering:A
+Connect,5_Deciphering:Result,2_1_Deinterleaving:A
+Connect,2_1_Deinterleaving:Result,2_2_Viterbi_Decoding:A
+Connect,2_2_Viterbi_Decoding:Result,2_3_Block_Decoding:A
+Connect,2_3_Block_Decoding:Result,2_4_BB_TR_IF_Handling:A
+//
+Connect,4_1_RX_IF_Handling:Result,4_2_Pre_Processing:A
+Connect,4_2_Pre_Processing:Result1,4_4_AFC:A
+Connect,4_2_Pre_Processing:Result2,4_3_Channel_Noise_Est_and_Blind_Detec:A
+Connect,4_3_Channel_Noise_Est_and_Blind_Detec:Result1,4_4_AFC:B
+Connect,4_3_Channel_Noise_Est_and_Blind_Detec:Result2,4_5_Pre_Tap_Calculation:A
+Connect,4_4_AFC:Result,4_6_Filter:A
+Connect,4_5_Pre_Tap_Calculation:Result,4_6_Filter:B
+Connect,Delay1:Result,4_6_Filter:C
+Connect,4_6_Filter:Result,4_7_Equalize:A
+Connect,4_7_Equalize:Result,4_8_DFE_Adaption:A
+Connect,4_8_DFE_Adaption:Result1,Delay1:A
+Connect,4_8_DFE_Adaption:Result2,4_9_BB_BB_IF_Handling:A
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                                Iteration blocks
+// ------------------------------------------------------------------------------- //
+Itrblk,iterblk1,150
+null
+4_6_Filter,4_7_Equalize,4_8_DFE_Adaption,Delay1
+// ------------------------------------------------------------------------------- //
+Itrblk,iterblk2,N
+null
+3_1_Burst_Formatting,3_2_Ciphering,3_3_BB_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+Itrblk,iterblk3,N
+null
+5_Deciphering
+// ------------------------------------------------------------------------------- //

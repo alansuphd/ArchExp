@@ -1,0 +1,18 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  INSTRUCTIONS : Design and Engine Control for Architecture Exploration
+//  AUTHOR       : Alan Su
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 23rd 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+   
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Design Control Parameters //
+   Edge                    //Design specification name to be matched with TG(s)
+   1                       //Specification ID
+   8192                    //Max total memory usage (MB)
+   2308000                 //Max latency of one execution of each TG (ns)
+   577000                  //Max periodicty of pipelined execution of each TG (ns)
+   5000.0                  //Max power usage by any architecture (mW)
+   100000.0                //Max area occupied by any architecture (sq.mm)
+   20000.00                //Max cost in US$ of any architecture
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+

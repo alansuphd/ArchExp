@@ -1,0 +1,5417 @@
+/* @(#) $Source: /Edge/CCEDGE_complib.txt$ $Revision: 1.1$ $Date: Thu Jan 16 06:42:59 2014 GMT$ */
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// CCEDGE_complib.txt : AGILENT RESTRICTED : PERMISSION 640
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  SYNOPSIS     : Textual library of Nokia Networks EDGE basestation using CCs 
+//  AUTHOR       : Chaitali Biswas, Agilent Technologies, CA, USA
+//  CONTACT      : chaitali_biswas@agilent.com, +1 (818) 879 6348
+//  UPDATED      : September 7th 2001
+//  CAVEAT       : Contents may only be modified by the library master
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  IMPACT : JNS_ArchGraphC, JNS_CompC, JNS_CompPortC, JNS_DsnC, JNS_FncblkC, 
+//           JNS_IntrfcC, JNS_PlatfmC, JNS_ShFncblkC, JNS_ShIntrfcC, JNS_ShPlatfmC
+//           JNS_UAttrC & relevant enumerations in enum.hxx
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  README : 
+//
+//           This file is read by JNS_DsnC routines. 
+//        
+//           The naming convention for similar files is <name>_complib.txt
+//
+//           All comments shall be preceeded by the double forward slash : '//' 
+//
+//           All commented examples shall be preceeded by "//--" 
+//
+//           No lines should start with the space character : ' '
+//          
+//           Architectural components are of 5 types
+//           1. Platforms             : JNS_PlatfmC:JNS_CompC
+//           2. Interfaces            : JNS_IntrfcC:JNS_CompC
+//           3. Functional blocks     : JNS_FncblkC:JNS_CompC
+//           4. Composite components  : JNS_ArchGraphC
+//           5. Component ports       : JNS_CompPortC
+//           Component types 3 & 4 have component ports associated with them
+//           Component types 1, 2, & 3 have user attributes of type JNS_UAttrC
+//
+//           Attribute fields for these categories and their sub-categories are 
+//           listed at the head of each group
+//
+//           Attributes defined as L,<...> imply comma separated lists w/o blank
+//           spaces
+//           
+//           Attributes defined within [ ] imply lists one on each line
+//        
+//           JNS_DsnC routines intepreting this file are location sensitive except
+//           for the order or occurence of user defined attributes. Hence
+//           order of attributes shall be maintained at all times. The keyword 
+//           'null' shall be used to denote an absent attribute 
+// 
+//           The contents of this file should at all times be used as the default
+//           standard for textual specification of library components for the 
+//           Janus : Platform Synthesis tool 
+//      
+//           This file shall be maintained under 
+//           + cvs/janus/examples in CVS system
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//                                                                     JNS_PlatfmC 
+// ------------------------------------------------------------------------------- //
+// Textual Definition : JNS_PlatfmC mapping : Units : Comments
+// 
+//         Comp       :                     :       : Keyword for JNS_DsnC
+//         Platfm     :                     :       : Keyword for JNS_DsnC
+//         <name>     : JNS_CompC.m_name    :       : StringC
+//         <type>     : m_level             :       : PlatfmE
+//         <family>   : JNS_CompC.m_family  :       : Keyword for JNS_DsnC
+//         L,<platfm> : m_sbplatfmPL        :       : Names of possible sub_platfms
+//         L,<intrfc> : m_psintrfcPL        :       : Names of possible intrfcs
+//         [<uattr>]  : m_uattrL            :       : List of user attributes as
+//                                                    <name>,<datatype>,<value>
+//                                                    on each line
+// User Attributes                          :
+//         BaseCost,float,<#>               : $US   : range [0.00 9999999999.99]
+//         MaxSize,float,<#>                : sq.mm.: range [0.00 9999999999.99] 
+//         
+// ------------------------------------------------------------------------------- //
+// 
+// ------------------------------------------------------------------------------- //
+//                                                                          GenPCB   
+// Comments : Generic PCB
+// ------------------------------------------------------------------------------- //
+//--Comp
+//--Platfm
+//--GenPCB
+//--PCB
+//--null
+//--null
+//--null
+//--BaseCost,float,2.00
+//--MaxSize,int,25000.00
+// ------------------------------------------------------------------------------- //
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//                                                                     JNS_IntrfcC 
+// ------------------------------------------------------------------------------- //
+// Textual Definition : JNS_IntrfcC mapping : Units : Comments
+// 
+//         Comp       :                     :       : Keyword for JNS_DsnC
+//         Intrfc     :                     :       : Keyword for JNS_DsnC
+//         <name>     : JNS_CompC.m_name    :       : StringC
+//         <type>     : m_intrfctype        :       : InterfaceE
+//         <family>   : JNS_CompC.m_family  :       : Keyword for JNS_DsnC
+//         <period>   : m_minperiod         : ns    : Inverse of max clk rate 
+//         <width>    : m_bitwidth          : bits  : Width of interconnection
+//         L,<platfm> : m_psplatfmPL        :       : Names of possible platfms
+//         [<uattr>]  : m_uattrL            :       : List of user attributes as
+//                                                    <name>,<datatype>,<value>
+//                                                    on each line
+// User Attributes                          :
+//         BaseCost,float,<#>               : $US   : range [0.00 9999999999.99]
+//        
+// ------------------------------------------------------------------------------- //
+//
+// ------------------------------------------------------------------------------- //
+//                                                                          PCBBus   
+// Comments : Generic bus used on any PCB
+// ------------------------------------------------------------------------------- //
+//--Comp
+//--Intrfc
+//--PCBBus
+//--BUS
+//--null
+//--10
+//--32
+//--null
+//--BaseCost,float,0.02
+// ------------------------------------------------------------------------------- //
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//                                                                     JNS_FncblkC 
+// ------------------------------------------------------------------------------- //
+// Textual Definition : JNS_FncblkC mapping : Units : Comments
+// 
+//         Comp       :                     :       : Keyword for JNS_DsnC
+//         Fncblk     :                     :       : Keyword for JNS_DsnC
+//         <name>     : JNS_CompC.m_name    :       : StringC
+//         <function> : m_function          :       : StringC : functionality
+//         <type>     : m_type              :       : CompTypeE (HW/SW)
+//         <functype> : m_functype          :       : FuncTypeE : subfunctionality 
+//         <depend#>  : m_depend            :       : FuncDepend : (see details)
+//         <family>   : JNS_CompC.m_family  :       : Keyword for JNS_DsnC
+//         <period>   : m_minperiod         : ns    : Inverse of max clk rate 
+//         <stage#>   : m_stagenum          :       : # stages built in pipelining
+//         <current>  : m_lkcurr            : mA    : Leakage current 
+//         <power>    : m_run_pwr           : mW    : Run time power
+//         L,<platfm> : m_psplatfmPL        :       : Names of possible platfms
+//         L,<fncblk> : m_dpfncblkPL        :       : Names of dependent fncblks
+//         [<uattr>]  : m_uattrL            :       : List of user attributes as
+//                                                    <name>,<datatype>,<value>
+//                                                    on each line
+//         CompPort   :                     :       : Keyword for DsnC
+//         <name>     : JNS_CompPort.m_name :       : StringC
+//         <dir>      : JNS_CompPort.m_type :       : PortTypeE (IN/OUT/BI)
+//         <sampsize> :                     :       : Sample size
+//         L,<intrfc> : m_psintrfcPL        :       : Names of possible intrfcs
+//         EndCompPorts                             : Keyword for DsnC
+//         
+// User Attributes                          :
+//         BaseCost,float,<#>               : $US   : range [0.00 9999999999.99]
+//         Size,float,<#>                   : sq.mm.: range [0.00 9999999999.99] 
+//         ReadDelay,int,<#>                : ns    : range [0 9999999999]
+//         WriteDelay,int,<#>               : ns    : range [0 9999999999]
+//         CodeSize,int,<#>                 : byte  : range [0 9999999999]
+//         DataSize,int,<#>                 : byte  : range [0 9999999999]
+//         OnChipMem,int,<#>                : KB    : range [0 9999999999]
+//         OnChipCodeMem,int,<#>            : KB    : range [0 9999999999]
+//         OnChipDataMem,int,<#>            : KB    : range [0 9999999999]
+//         DataCompDelay,int,<#>            : ns    : range [0 9999999999]
+//         ControlCompDelay,int,<#>         : ns    : range [0 9999999999]
+//         Throughput,int,<#>               :       : range [0 9999999999] 
+//         ArchWidth,int,<#>                : bits  : range [0 9999999999]
+//        
+// ------------------------------------------------------------------------------- //
+//                                                                       Processor
+// Comments : 
+//           <function> = {Processor}
+//           <type>     = {HW}
+//           <functype> = {DSP, DSP_CORE, MICRO_CONTROLLER}
+//           <depend#>  = {1 = AGGREGATE, 2 = COMPOSITE}
+//           L,<fncblk> = null
+//           [<uattr>]  = { BaseCost, Size, ReadDelay, WriteDelay, Throughput,
+//                          ArchWidth, XOR({OnChipMem, OnChipDataMem},
+//                                         {OnChipCodeMem, OnChipDataMem},
+//                                         {OnChipMem})}
+//            <dir>     = {BI} Component ports are always bidirectional           
+// ------------------------------------------------------------------------------- //
+//                                                                     LU_DSP16210
+// Comments : Stand alone DSP chip 16210 from Lucent Technologies (R)
+// ------------------------------------------------------------------------------- //
+//--Comp
+//--Fncblk
+//--LU_DSP16210
+//--Processor
+//--HW
+//--DSP
+//--1
+//--Lucent
+//--10
+//--1
+//--98
+//--241
+//--GenPCB
+//--null
+//--BaseCost,float,32.29
+//--Size,float,121
+//--OnChipMem,int,120
+//--OnChipDataMem,int,0
+//--ArchWidth,int,16
+//
+// CompPort : Data
+//
+//--CompPort
+//--Data
+//--BI
+//--16
+//--null
+//
+//--EndCompPorts
+// ------------------------------------------------------------------------------- //
+//
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                                          Memory 
+// Comments : 
+//           <function> = {Memory}
+//           <type>     = {HW}
+//           <functype> = {MEMORY, MEM_CORE}
+//           <depend#>  = {1 = AGGREGATE, 2 = COMPOSITE}
+//           <period>   = null
+//           <stage#>   = {1}
+//           L,<fncblk> = null
+//           [<uattr>]  = { BaseCost, Size, ReadDelay, WriteDelay, OnChipMem,
+//                          ArchWidth }
+//            <dir>     = {BI} Component ports are always bidirectional           
+// ------------------------------------------------------------------------------- //
+//                                                                        TC554161
+// Comments : Standalone prepackaged CMOS memory chip from Toshiba (R)
+// ------------------------------------------------------------------------------- //
+//--Comp
+//--Fncblk
+//--TC554161
+//--Memory
+//--HW
+//--MEMORY
+//--1
+//--Toshiba
+//--null
+//--1
+//--100
+//--55
+//--GenPCB
+//--null
+//--BaseCost,float,32.29
+//--Size,float,266
+//--ReadDelay,int,35
+//--WriteDelay,int,70
+//--OnChipMem,int,4096
+//--ArchWidth,int,18
+//
+// CompPort : Data
+//
+//--CompPort
+//--Data
+//--BI
+//--16
+//--null
+//
+//--EndCompPorts
+// ------------------------------------------------------------------------------- //
+//
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                         Application Specific IC
+// Comments : 
+//           <type>     = {HW}
+//           <functype> = {ASIC, ASIC_CORE, ADD_COLLECTOR, COPY_DISTRIBUTOR, 
+//                         DELAY, MERGE_COLLECTOR, SPLIT_DISTRIBUTOR}
+//           <depend#>  = {1 = AGGREGATE, 2 = COMPOSITE}
+//           L,<fncblk> = null
+//           [<uattr>]  = { BaseCost, Size, DataCompDelay, ControlCompDelay,
+//                          OnChipMem, Throughput, ArchWidth }
+//            <dir>     = {IN,OUT} Component ports are always unidirectional           
+// ------------------------------------------------------------------------------- //
+//                                                     EDGE_TR_BB_IF_Handling_HW_1 
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_TR_BB_IF_Handling_HW_1
+TR_BB_IF_Handling
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.67
+Size,float,20000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A 
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_HW_1
+Conv_Encoding
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,20000
+ControlCompDelay,int,0
+Throughput,int,20000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_HW_1
+Block_Encoding
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_HW_1
+Ciphering
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+25
+GenPCB
+null
+BaseCost,float,0.20
+Size,float,2500.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                     EDGE_BB_BB_IF_Handling_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_BB_BB_IF_Handling_HW_1
+BB_BB_IF_Handling
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_RX_IF_Handling_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_RX_IF_Handling_HW_1
+RX_IF_Handling
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_HW_1
+AFC
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_HW_1
+Filter
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+10
+GenPCB
+null
+BaseCost,float,0.10
+Size,float,1000.0
+DataCompDelay,int,160
+ControlCompDelay,int,0
+Throughput,int,160
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_HW_1
+Equalize
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+100
+GenPCB
+null
+BaseCost,float,0.80
+Size,float,10000.0
+DataCompDelay,int,640
+ControlCompDelay,int,0
+Throughput,int,640
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_HW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_HW_2
+Equalize
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.60
+Size,float,20000.0
+DataCompDelay,int,320
+ControlCompDelay,int,0
+Throughput,int,320
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_HW_1
+DFE_Adaption
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+10
+GenPCB
+null
+BaseCost,float,0.10
+Size,float,1000.0
+DataCompDelay,int,50
+ControlCompDelay,int,0
+Throughput,int,50
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_HW_1
+Deciphering
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+25
+GenPCB
+null
+BaseCost,float,0.20
+Size,float,2500.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_HW_1
+Viterbi_Decoding
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.67
+Size,float,20000.0
+DataCompDelay,int,450000
+ControlCompDelay,int,0
+Throughput,int,450000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_HW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_HW_2
+Viterbi_Decoding
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+300
+GenPCB
+null
+BaseCost,float,2.50
+Size,float,30000.0
+DataCompDelay,int,230000
+ControlCompDelay,int,0
+Throughput,int,230000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_HW_1
+Block_Decoding
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+100
+GenPCB
+null
+BaseCost,float,0.80
+Size,float,10000.0
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                      EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+BB_BB_IF_Handling_and_DL_IF_Unit
+HW
+ASIC
+0
+Nokia
+10
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+2800
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                        Software Implementations 
+// Comments :
+//           <type>     = {SW}
+//           <functype> = {FUNC}
+//           <depend#>  = {0 = INDEPENDENT}
+//           L,<fncblk> = {Processor, Composite Archgraph} 
+//           [<uattr>]  = { BaseCost, CodeSize, Datasize, 
+//                          DataCompDelay, ControlCompDelay}
+//            <dir>     = {IN,OUT} Component ports are always unidirectional
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_1
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_2
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_3
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_4
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_5
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Conv_Encoding_SW_6
+Conv_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_1
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_2
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_3
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_4
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_5
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Encoding_SW_6
+Block_Encoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_1
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_2
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_3
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_4
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_5
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Interleaving_SW_6
+Interleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_1
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_2
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_3
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_4
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_5
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Burst_Formatting_SW_6
+Burst_Formatting
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_1
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_2
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_3
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_4
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_5
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Ciphering_SW_6
+Ciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+350
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+350
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_1
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_2
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_3
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_4
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_5
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Processing_SW_6
+Pre_Processing
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+19200
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+3300
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_1
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_2
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_3
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_4
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_5
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_6
+Channel_Noise_Est_and_Blind_Detec
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+3300
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+250
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+250
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_1
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_2
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_3
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_4
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_5
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_AFC_SW_6
+AFC
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+19200
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+19200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_1
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_2
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_3
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_4
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_5
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Pre_Tap_Calculation_SW_6
+Pre_Tap_Calculation
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+250
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+900
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_1
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_2
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_3
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_4
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_5
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Filter_SW_6
+Filter
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+128
+null
+//
+// CompPort : B
+//
+CompPort
+B
+IN
+6
+null
+//
+// CompPort : C
+//
+CompPort
+C
+IN
+3
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+64
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_1
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_2
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_3
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_4
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_5
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Equalize_SW_6
+Equalize
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+64
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+24
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_1
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_2
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_3
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_4
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_5
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_DFE_Adaption_SW_6
+DFE_Adaption
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,250
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+24
+null
+//
+// CompPort : Result1
+//
+CompPort
+Result1
+OUT
+3
+null
+//
+// CompPort : Result2
+//
+CompPort
+Result2
+OUT
+18
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_1
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+/
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_2
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_3
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_4
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_5
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deciphering_SW_6
+Deciphering
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+2800
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_1
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_2
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_3
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_4
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_5
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Deinterleaving_SW_6
+Deinterleaving
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+11200
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_1
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_2
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_3
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_4
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_5
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Viterbi_Decoding_SW_6
+Viterbi_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+11200
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_1
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_1
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_1
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_2
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_2
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_2
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_3
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_3
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_3
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_4
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_4
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_4
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_5
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_5
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_5
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_6
+// ------------------------------------------------------------------------------- //
+Comp
+Fncblk
+EDGE_Block_Decoding_SW_6
+Block_Decoding
+SW
+FUNC
+0
+Nokia
+null
+null
+null
+null
+null
+2:StarPro_2000_6
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// CompPort : A
+//
+CompPort
+A
+IN
+1400
+null
+//
+// CompPort : Result
+//
+CompPort
+Result
+OUT
+1400
+null
+//
+EndCompPorts
+// ------------------------------------------------------------------------------- //
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//                                                                  JNS_ArchGraphC 
+// ------------------------------------------------------------------------------- //
+// Textual Definition : JNS_ArchGraphC mapping : Units : Comments
+// 
+//         ArchGraph  :                        :       : Keyword for JNS_DsnC
+//         <name>     :                        :       : StringC
+//         <type>     : m_status               :       : Type of AG
+//         AGComp     :                        :       : Keyword for JNS_DsnC
+//         [<comps>]  :                        :       : List of AG components
+//                                                       S*,<name>,<list#>,<#>
+//                                                       <tasklist>
+//                                                       <connlist>
+//         CompPort   :                        :       : Keyword for JNS_DsnC 
+//         [<ports>]  :                        :       : List of AG external ports
+//         Connect    :                        :       : Keyword for JNS_DsnC
+//         [<conns>]  :                        :       : List of connections
+//         EndArch    :                        :       : Keyword for JNS_DsnC
+//                      
+// Component Listing  :
+//         S*         : * = {F, I, P, A}       :       : Keyword for JNS_DsnC
+//         <name>     :                        :       : StringC   
+//         <list#>    :                        :       : ID within this text file
+//         <SPid#>    :                        :       : ID of super SP for AGComp
+//         <tasklist> :                        :       : List of tasks
+//         <connlist> :                        :       : List of connections
+//
+// ------------------------------------------------------------------------------- //
+//                                                                       Composite 
+// Comments :
+//           <type>     = {COMPARCH}
+// ------------------------------------------------------------------------------- //
+//                                                                  StarPro_2000_1 
+// Comments : StarPro composite component w/ 1 StarCore : AGERE SYSTEMS (R)
+// ------------------------------------------------------------------------------- //
+//--Comp
+//--ArchGraph
+//--StarPro_2000_1
+//--COMPARCH
+//
+// AGComp SP StarPro_Chip 
+//
+//--AGComp
+//--SP,StarPro_Chip,1,1
+//--null
+//--null
+//
+// AGComp SF StarCore_140 
+//
+//--AGComp
+//--SF,StarCore_140,2,1
+//--null
+//--null
+//
+// AGComp SF StarPro_Mem
+//
+//--AGComp
+//--SF,StarPro_Mem,8,1
+//--null
+//--null
+//
+// AGComp SF StarPro_uC
+//
+//--AGComp
+//--SF,StarPro_uC,9,1
+//--null
+//--null
+//
+// AGComp SI DaytonaBus
+//
+//--AGComp
+//--SI,DaytonaBus,10,1
+//--null
+//--null
+//
+// CompPort : SIU_A
+//
+//--CompPort
+//--SIU_A
+//--BI
+//--32
+//null
+//
+// CompPort : SIU_B
+//
+//--CompPort
+//--SIU_B
+//--BI
+//--32
+//null
+//
+// CompPort : SIU_C
+//
+//--CompPort
+//--SIU_C
+//--BI
+//--32
+//null
+//
+// CompPort : PIU
+//
+//--CompPort
+//--PIU
+//--BI
+//--32
+//null
+//
+// CompPort : MIU_A
+//
+//--CompPort
+//--MIU_A
+//--BI
+//--32
+//null
+//
+// CompPort : MIU_B
+//
+//--CompPort
+//--MIU_B
+//--BI
+//--32
+//--null
+//
+// Connect  : StarCore_140[2] : SIU_A <--> DaytonaBus[10]
+//
+//--Connect,2,SIU_A,10
+//
+// Connect  : StarCore_140[2] : SIU_B <--> DaytonaBus[10]
+//
+//--Connect,2,SIU_B,10
+//
+// Connect  : StarCore_140[2] : PIU <--> DaytonaBus[10]
+//
+//--Connect,2,PIU,10
+//
+// Connect  : StarPro_Mem[8] : PIU_A <--> DaytonaBus[10]
+//
+//--Connect,8,PIU_A,10
+//
+// Connect  : StarPro_Mem[8] : PIU_B <--> DaytonaBus[10]
+//
+//--Connect,8,PIU_B,10
+//
+// Connect  : StarPro_uC[9] : PIU_A <--> DaytonaBus[10]
+//
+//--Connect,9,PIU_A,10
+//
+// Connect  : StarPro_uC[9] : PIU_B <--> DaytonaBus[10]
+//
+//--Connect,9,PIU_B,10
+//
+// Connect  : StarPro_Chip[1] : SIU_A <--> DaytonaBus[10]
+//
+//--Connect,1,SIU_A,10
+//
+// Connect  : StarPro_Chip[1] : SIU_B <--> DaytonaBus[10]
+//
+//--Connect,1,SIU_B,10
+//
+// Connect  : StarPro_Chip[1] : SIU_C <--> DaytonaBus[10]
+//
+//--Connect,1,SIU_C,10
+//
+// Connect  : StarPro_Chip[1] : PIU <--> DaytonaBus[10]
+//
+//--Connect,1,PIU,10
+//
+// Connect  : StarPro_Chip[1] : MIU_A <--> DaytonaBus[10]
+//
+//--Connect,1,MIU_A,10
+//
+// Connect  : StarPro_Chip[1] : MIU_B <--> DaytonaBus[10]
+//
+//--Connect,1,MIU_B,10
+//
+//--EndArch
+// ------------------------------------------------------------------------------- //
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //

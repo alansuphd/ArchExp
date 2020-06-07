@@ -1,0 +1,916 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// EDGE_taskgraph.txt :
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  SYNOPSIS     : Edge baseband task graph
+//  AUTHOR       : Alan Su, OddPoint
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 24th 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+//           Functional components are of 5 types:
+//           1. TaskGraph         : AS_TaskGraphC
+//           2. Task              : AS_TaskC
+//           3. TaskPort          : AS_TaskPortC
+//           4. Connection        : AS_ConnC
+//           5. Iteration blocks  : AS_ItrblkC
+//           6. Task lists        : AS_TaskListC
+//           
+//           The keyword 'null' shall be used to denote an absent attribute
+//
+// ------------------------------------------------------------------------------- //
+//                                                                            Edge
+// Comments : EDGE basestation task graph
+// ------------------------------------------------------------------------------- //
+TaskGraph
+Edge
+//
+// Graph port  TR_BB_IF
+//
+Port
+TR_BB_IF
+Edge
+In
+1400
+1
+//
+// Graph port  RX_IF
+//
+Port
+RX_IF
+Edge
+In
+19200
+1
+//
+// Graph port  BB_BB_Out_IF
+//
+Port
+BB_BB_Out_IF
+Edge
+In
+2800
+1
+//
+// Graph port  BB_TR_IF
+//
+Port
+BB_TR_IF
+Edge
+Out
+1400
+1
+//
+// Graph port  TX_IF
+//
+Port
+TX_IF
+Edge
+Out
+2800
+1
+//
+// Graph port  BB_BB_In_IF
+//
+Port
+BB_BB_In_IF
+Edge
+Out
+2800
+1
+// ------------------------------------------------------------------------------- //
+//                                                                           Tasks
+// ------------------------------------------------------------------------------- //
+// Task : 1_1_TR_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+1_1_TR_BB_IF_Handling
+TR_BB_IF_Handling
+Edge
+EDGE_TR_BB_IF_Handling_HW_1
+Atomic
+//
+// Port  A
+//
+Port
+A
+1_1_TR_BB_IF_Handling
+In
+1400
+1
+//
+// Port  Result
+//
+Port
+Result
+1_1_TR_BB_IF_Handling
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 1_2_Conv_Encoding
+// ------------------------------------------------------------------------------- //
+Task
+1_2_Conv_Encoding
+Conv_Encoding
+Edge
+EDGE_Conv_Encoding_HW_1,EDGE_Conv_Encoding_SW_0
+Atomic
+//
+// Port  A
+//
+Port
+A
+1_2_Conv_Encoding
+In
+1400
+1
+//
+// Port  Result
+//
+Port
+Result
+1_2_Conv_Encoding
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 1_3_Block_Encoding
+// ------------------------------------------------------------------------------- //
+Task
+1_3_Block_Encoding
+Block_Encoding
+Edge
+EDGE_Block_Encoding_HW_1,EDGE_Block_Encoding_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+1_3_Block_Encoding
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+1_3_Block_Encoding
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 1_4_Interleaving
+// ------------------------------------------------------------------------------- //
+Task
+1_4_Interleaving
+Interleaving
+Edge
+EDGE_Interleaving_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+1_4_Interleaving
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+1_4_Interleaving
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 3_1_Burst_Formatting
+// ------------------------------------------------------------------------------- //
+Task
+3_1_Burst_Formatting
+Burst_Formatting
+Edge
+EDGE_Burst_Formatting_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+3_1_Burst_Formatting
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+3_1_Burst_Formatting
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 3_2_Ciphering
+// ------------------------------------------------------------------------------- //
+Task
+3_2_Ciphering
+Ciphering
+Edge
+EDGE_Ciphering_HW_1,EDGE_Ciphering_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+3_2_Ciphering
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+3_2_Ciphering
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 3_3_BB_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+3_3_BB_BB_IF_Handling
+BB_BB_IF_Handling
+Edge
+EDGE_BB_BB_IF_Handling_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+3_3_BB_BB_IF_Handling
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+3_3_BB_BB_IF_Handling
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 7_BB_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+7_BB_BB_IF_Handling
+BB_BB_IF_Handling_and_DL_IF_Unit
+Edge
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+7_BB_BB_IF_Handling
+In
+2800
+1
+//
+// Port Result
+//
+Port
+Result
+7_BB_BB_IF_Handling
+Out
+2800
+1
+// ------------------------------------------------------------------------------- //
+// Task : 5_Deciphering
+// ------------------------------------------------------------------------------- //
+Task
+5_Deciphering
+Deciphering
+Edge
+EDGE_Deciphering_HW_1,EDGE_Deciphering_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+5_Deciphering
+In
+700
+1
+//
+// Port Result
+//
+Port
+Result
+5_Deciphering
+Out
+2800
+1
+// ------------------------------------------------------------------------------- //
+// Task : 2_1_Deinterleaving
+// ------------------------------------------------------------------------------- //
+Task
+2_1_Deinterleaving
+Deinterleaving
+Edge
+EDGE_Deinterleaving_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+2_1_Deinterleaving
+In
+11200
+1
+//
+// Port Result
+//
+Port
+Result
+2_1_Deinterleaving
+Out
+11200
+1
+// ------------------------------------------------------------------------------- //
+// Task : 2_2_Viterbi_Decoding
+// ------------------------------------------------------------------------------- //
+Task
+2_2_Viterbi_Decoding
+Viterbi_Decoding
+Edge
+EDGE_Viterbi_Decoding_HW_1,EDGE_Viterbi_Decoding_HW_2,EDGE_Viterbi_Decoding_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+2_2_Viterbi_Decoding
+In
+11200
+1
+//
+// Port Result
+//
+Port
+Result
+2_2_Viterbi_Decoding
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 2_3_Block_Decoding
+// ------------------------------------------------------------------------------- //
+Task
+2_3_Block_Decoding
+Block_Decoding
+Edge
+EDGE_Block_Decoding_HW_1,EDGE_Block_Decoding_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+2_3_Block_Decoding
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+2_3_Block_Decoding
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 2_4_BB_TR_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+2_4_BB_TR_IF_Handling
+TR_BB_IF_Handling
+Edge
+EDGE_TR_BB_IF_Handling_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+2_4_BB_TR_IF_Handling
+In
+1400
+1
+//
+// Port Result
+//
+Port
+Result
+2_4_BB_TR_IF_Handling
+Out
+1400
+1
+// ------------------------------------------------------------------------------- //
+// Task : 6_Downlink_Interface_Unit
+// ------------------------------------------------------------------------------- //
+Task
+6_Downlink_Interface_Unit
+BB_BB_IF_Handling_and_DL_IF_Unit
+Edge
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+6_Downlink_Interface_Unit
+In
+2800
+1
+//
+// Port Result
+//
+Port
+Result
+6_Downlink_Interface_Unit
+Out
+2800
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_1_RX_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+4_1_RX_IF_Handling
+RX_IF_Handling
+Edge
+EDGE_RX_IF_Handling_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+4_1_RX_IF_Handling
+In
+19200
+1
+//
+// Port Result
+//
+Port
+Result
+4_1_RX_IF_Handling
+Out
+19200
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_2_Pre_Processing
+// ------------------------------------------------------------------------------- //
+Task
+4_2_Pre_Processing
+Pre_Processing
+Edge
+EDGE_Pre_Processing_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_2_Pre_Processing
+In
+19200
+1
+//
+// Port Result1
+//
+Port
+Result1
+4_2_Pre_Processing
+Out
+19200
+1
+//
+// Port Result2
+//
+Port
+Result2
+4_2_Pre_Processing
+Out
+3300
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_3_Channel_Noise_Est_and_Blind_Detec
+// ------------------------------------------------------------------------------- //
+Task
+4_3_Channel_Noise_Est_and_Blind_Detec
+Channel_Noise_Est_and_Blind_Detec
+Edge
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_3_Channel_Noise_Est_and_Blind_Detec
+In
+3300
+1
+//
+// Port Result1
+//
+Port
+Result1
+4_3_Channel_Noise_Est_and_Blind_Detec
+Out
+250
+1
+//
+// Port Result2
+//
+Port
+Result2
+4_3_Channel_Noise_Est_and_Blind_Detec
+Out
+250
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_4_AFC
+// ------------------------------------------------------------------------------- //
+Task
+4_4_AFC
+AFC
+Edge
+EDGE_AFC_HW_1,EDGE_AFC_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_4_AFC
+In
+19200
+1
+//
+// Port B
+//
+Port
+B
+4_4_AFC
+In
+250
+1
+//
+// Port Result
+//
+Port
+Result
+4_4_AFC
+Out
+19200
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_5_Pre_Tap_Calculation
+// ------------------------------------------------------------------------------- //
+Task
+4_5_Pre_Tap_Calculation
+Pre_Tap_Calculation
+Edge
+EDGE_Pre_Tap_Calculation_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_5_Pre_Tap_Calculation
+In
+250
+1
+//
+// Port Result
+//
+Port
+Result
+4_5_Pre_Tap_Calculation
+Out
+900
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_6_Filter
+// ------------------------------------------------------------------------------- //
+Task
+4_6_Filter
+Filter
+Edge
+EDGE_Filter_HW_1,EDGE_Filter_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_6_Filter
+In
+128
+1
+//
+// Port B
+//
+Port
+B
+4_6_Filter
+In
+3
+1
+//
+// Port C
+//
+Port
+C
+4_6_Filter
+In
+6
+1
+//
+// Port Result
+//
+Port
+Result
+4_6_Filter
+Out
+64
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_7_Equalize
+// ------------------------------------------------------------------------------- //
+Task
+4_7_Equalize
+Equalize
+Edge
+EDGE_Equalize_HW_1,EDGE_Equalize_HW_2,EDGE_Equalize_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_7_Equalize
+In
+64
+1
+//
+// Port Result
+//
+Port
+Result
+4_7_Equalize
+Out
+24
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_8_DFE_Adaption
+// ------------------------------------------------------------------------------- //
+Task
+4_8_DFE_Adaption
+DFE_Adaption
+Edge
+EDGE_DFE_Adaption_HW_1,EDGE_DFE_Adaption_SW_0
+Atomic
+//
+// Port A
+//
+Port
+A
+4_8_DFE_Adaption
+In
+24
+1
+//
+// Port Result1
+//
+Port
+Result1
+4_8_DFE_Adaption
+Out
+3
+1
+//
+// Port Result2
+//
+Port
+Result2
+4_8_DFE_Adaption
+Out
+18
+1
+// ------------------------------------------------------------------------------- //
+// Task : 4_9_BB_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+Task
+4_9_BB_BB_IF_Handling
+BB_BB_IF_Handling_and_DL_IF_Unit
+Edge
+EDGE_BB_BB_IF_Handling_HW_1
+Atomic
+//
+// Port A
+//
+Port
+A
+4_9_BB_BB_IF_Handling
+In
+2800
+1
+//
+// Port Result
+//
+Port
+Result
+4_9_BB_BB_IF_Handling
+Out
+2800
+1
+// ------------------------------------------------------------------------------- //
+// Task : Delay1
+// ------------------------------------------------------------------------------- //
+Task
+Delay1
+Delay
+Edge
+Delay-1
+Delay
+1
+//
+// Port A
+//
+Port
+A
+Delay1
+In
+3
+1
+//
+// Port Result
+//
+Port
+Result
+Delay1
+Out
+3
+1
+// ------------------------------------------------------------------------------- //
+//                                                                     Connections
+// Comment : Connect,<srcname>:<srcport>,<snkname>:<snkport>
+// ------------------------------------------------------------------------------- //
+//
+// Incoming connections to TaskGraph
+//
+Conn
+Edge:TR_BB_IF,1_1_TR_BB_IF_Handling:A
+//
+Conn
+Edge:BB_BB_Out_IF,7_BB_BB_IF_Handling:A
+//
+Conn
+Edge:RX_IF,4_1_RX_IF_Handling:A
+//
+Conn
+Edge:BB_BB_Out_IF,6_Downlink_Interface_Unit:A
+//
+// Outgoing connections from TaskGraph
+//
+Conn
+2_4_BB_TR_IF_Handling:Result,Edge:BB_TR_IF
+//
+Conn
+3_3_BB_BB_IF_Handling:Result,Edge:BB_BB_In_IF
+//
+Conn
+4_9_BB_BB_IF_Handling:Result,Edge:BB_BB_In_IF
+//
+Conn
+6_Downlink_Interface_Unit:Result,Edge:TX_IF
+//
+// Internal connections of Taskgraph
+//
+Conn
+1_1_TR_BB_IF_Handling:Result,1_2_Conv_Encoding:A
+//
+Conn
+1_2_Conv_Encoding:Result,1_3_Block_Encoding:A
+//
+Conn
+1_3_Block_Encoding:Result,1_4_Interleaving:A
+//
+Conn
+1_4_Interleaving:Result,3_1_Burst_Formatting:A
+//
+Conn
+3_1_Burst_Formatting:Result,3_2_Ciphering:A
+//
+Conn
+3_2_Ciphering:Result,3_3_BB_BB_IF_Handling:A
+//
+Conn
+7_BB_BB_IF_Handling:Result,5_Deciphering:A
+//
+Conn
+5_Deciphering:Result,2_1_Deinterleaving:A
+//
+Conn
+2_1_Deinterleaving:Result,2_2_Viterbi_Decoding:A
+//
+Conn
+2_2_Viterbi_Decoding:Result,2_3_Block_Decoding:A
+//
+Conn
+2_3_Block_Decoding:Result,2_4_BB_TR_IF_Handling:A
+//
+// Equalizer
+//
+Conn
+4_1_RX_IF_Handling:Result,4_2_Pre_Processing:A
+//
+Conn
+4_2_Pre_Processing:Result1,4_4_AFC:A
+//
+Conn
+4_2_Pre_Processing:Result2,4_3_Channel_Noise_Est_and_Blind_Detec:A
+//
+Conn
+4_3_Channel_Noise_Est_and_Blind_Detec:Result1,4_4_AFC:B
+//
+Conn
+4_3_Channel_Noise_Est_and_Blind_Detec:Result2,4_5_Pre_Tap_Calculation:A
+//
+Conn
+4_4_AFC:Result,4_6_Filter:A
+//
+Conn
+4_5_Pre_Tap_Calculation:Result,4_6_Filter:B
+//
+Conn
+Delay1:Result,4_6_Filter:C
+//
+Conn
+4_6_Filter:Result,4_7_Equalize:A
+//
+Conn
+4_7_Equalize:Result,4_8_DFE_Adaption:A
+//
+Conn
+4_8_DFE_Adaption:Result1,Delay1:A
+//
+Conn
+4_8_DFE_Adaption:Result2,4_9_BB_BB_IF_Handling:A
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                                Iteration blocks
+// ------------------------------------------------------------------------------- //
+IterBlk
+Eqalizer_sub
+150
+4_6_Filter,4_7_Equalize,4_8_DFE_Adaption,Delay1
+// ------------------------------------------------------------------------------- //
+IterBlk
+Burst_Formatting_and_Ciphering
+1
+3_1_Burst_Formatting,3_2_Ciphering,3_3_BB_BB_IF_Handling
+// ------------------------------------------------------------------------------- //
+IterBlk
+Deciphering
+1
+5_Deciphering
+//
+//
+// ------------------------------------------------------------------------------- //
+//                                                                     Cycle heads
+// ------------------------------------------------------------------------------- //
+CycleHead
+4_6_Filter
+// ------------------------------------------------------------------------------- //

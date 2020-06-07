@@ -1,0 +1,41 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  INSTRUCTIONS : Design Spec for Architecture Exploration
+//  AUTHOR       : Alan Su
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 23rd 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Design Spec Parameters //
+   // 0. Design name
+   // 1. Specification name to be matched with TG(s)
+   // 2. Specification ID
+   // 3. Max total memory usage (MB)
+   // 4. Max latency of one execution of each TG (ns)
+   // 5. Max periodicty of pipelined execution of each TG (ns)
+   // 6. Max power usage by any architecture (mW)
+   // 7. Max area occupied by any architecture (sq.mm)
+   // 8. Max cost in US$ of any architecture
+// Design name
+   Edge
+
+// First spec
+   Spec_1
+   0
+   8192
+   2308000
+   577000
+   5000.5
+   100000.2
+   20000.07
+
+// Second spec
+   Spec_2
+   1
+   8192
+   2308000
+   577000
+   6000.5
+   120000.2
+   30000.07
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+

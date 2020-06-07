@@ -1,0 +1,1749 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// EDGE_complib
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  SYNOPSIS     : Component library of EDGE basestation baseband
+//  AUTHOR       : Alan Su
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 24, 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Functional block component parameters
+//   Comp		: Start of a component description
+//   FuncBlk		: Functional block descriptor
+//   Name		: block name, unique
+//   Function name	: function name, may have multiple references
+//   Type		: Hardware, Software
+//   Block type		: Function, Processor, Memory, MemoryCore, Distributor
+//   			  Collector, Delay
+//   Max clock rate	: Maximum clock rate in MHz. If software use null
+//   No of stages	: No of pipelined stages. If software use null
+//   Leakage current	: Leakage current in uA. If software use null
+//   Dynamic power	: Dynamic power in uWh. If software use null
+//   Platform type	: What platform it is on: CABINET, PCB, DIE, CORE
+//   Dep. functions	: List, Dependent functional blocks, e.g. memory for software
+//   Uattr:		: Any number of attribute lists
+//
+// Component port parameters
+//   Port		: Start of a component port description
+//   Category		: Category name, used for FuncBlk component ports
+//   Component name	: The name of the component this port attaches to
+//   Direction		: In, Out, Bi, i.e. Bi-directional
+//   BPS		: Number of bits per sample
+//   Sample rates	: List, Sample rate, AKA data rate
+//   Interfaces		: List, interfaces it can hook up with
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Platform block component parameters
+//   Comp		: Start of a component description
+//   Platform		: Platform descriptor
+//   Name		: Platform name, unique
+//   Type		: Cabinet, PCB, Die, Core
+//   Sub-platform	: Sub-platform that it can host
+//   Interfaces		: List of interfaces it can use
+//   Uattr:		: Any number of attribute lists
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Interface block component parameters
+//   Comp		: Start of a component description
+//   Interface		: Interface descriptor
+//   Name		: Interface name, unique
+//   Platform		: Platform it uses on
+//   Type		: Bus, Wire
+//   Uattr:		: Any number of attribute lists
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Hardware functional block components
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// ------------------------------------------------------------------------------- //
+//                                                     EDGE_TR_BB_IF_Handling_HW_1 
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_TR_BB_IF_Handling_HW_1
+TR_BB_IF_Handling
+Hardware
+Function
+100
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.67
+Size,float,20000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A 
+//
+Port
+FuncBlk
+EDGE_TR_BB_IF_Handling_HW_1
+A
+In
+1400
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_TR_BB_IF_Handling_HW_1
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Conv_Encoding_HW_1
+Conv_Encoding
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,20000
+ControlCompDelay,int,0
+Throughput,int,20000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Conv_Encoding_HW_1
+A
+In
+1400
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Conv_Encoding_HW_1
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Block_Encoding_HW_1
+Block_Encoding
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Block_Encoding_HW_1
+A
+In
+1400
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Block_Encoding_HW_1
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Ciphering_HW_1
+Ciphering
+Hardware
+Function
+100
+1
+null
+25
+GenPCB
+null
+BaseCost,float,0.20
+Size,float,2500.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Ciphering_HW_1
+A
+In
+350
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Ciphering_HW_1
+Result
+Out
+350
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                     EDGE_BB_BB_IF_Handling_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_BB_BB_IF_Handling_HW_1
+BB_BB_IF_Handling
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_BB_BB_IF_Handling_HW_1
+A
+In
+350
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_BB_BB_IF_Handling_HW_1
+Result
+Out
+350
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_RX_IF_Handling_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_RX_IF_Handling_HW_1
+RX_IF_Handling
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_RX_IF_Handling_HW_1
+A
+In
+19200
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_RX_IF_Handling_HW_1
+Result
+Out
+19200
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_AFC_HW_1
+AFC
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_AFC_HW_1
+A
+In
+19200
+1
+PCBBus
+//
+// Port : B
+//
+Port
+FuncBlk
+EDGE_AFC_HW_1
+B
+In
+250
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_AFC_HW_1
+Result
+Out
+19200
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Filter_HW_1
+Filter
+Hardware
+Function
+100
+1
+null
+10
+GenPCB
+null
+BaseCost,float,0.10
+Size,float,1000.0
+DataCompDelay,int,160
+ControlCompDelay,int,0
+Throughput,int,160
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Filter_HW_1
+A
+In
+128
+1
+PCBBus
+//
+// Port : B
+//
+Port
+FuncBlk
+EDGE_Filter_HW_1
+B
+In
+6
+1
+PCBBus
+//
+// Port : C
+//
+Port
+FuncBlk
+EDGE_Filter_HW_1
+C
+In
+3
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Filter_HW_1
+Result
+Out
+64
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Equalize_HW_1
+Equalize
+Hardware
+Function
+100
+1
+null
+100
+GenPCB
+null
+BaseCost,float,0.80
+Size,float,10000.0
+DataCompDelay,int,640
+ControlCompDelay,int,0
+Throughput,int,640
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Equalize_HW_1
+A
+In
+64
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Equalize_HW_1
+Result
+Out
+24
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_HW_2
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Equalize_HW_2
+Equalize
+Hardware
+Function
+100
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.60
+Size,float,20000.0
+DataCompDelay,int,320
+ControlCompDelay,int,0
+Throughput,int,320
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Equalize_HW_2
+A
+In
+64
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Equalize_HW_2
+Result
+Out
+24
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_DFE_Adaption_HW_1
+DFE_Adaption
+Hardware
+Function
+100
+1
+null
+10
+GenPCB
+null
+BaseCost,float,0.10
+Size,float,1000.0
+DataCompDelay,int,50
+ControlCompDelay,int,0
+Throughput,int,50
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_HW_1
+A
+In
+24
+1
+PCBBus
+//
+// Port : Result1
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_HW_1
+Result1
+Out
+3
+1
+PCBBus
+//
+// Port : Result2
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_HW_1
+Result2
+Out
+18
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Deciphering_HW_1
+Deciphering
+Hardware
+Function
+100
+1
+null
+25
+GenPCB
+null
+BaseCost,float,0.20
+Size,float,2500.0
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Deciphering_HW_1
+A
+In
+2800
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Deciphering_HW_1
+Result
+Out
+11200
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Viterbi_Decoding_HW_1
+Viterbi_Decoding
+Hardware
+Function
+100
+1
+null
+200
+GenPCB
+null
+BaseCost,float,1.67
+Size,float,20000.0
+DataCompDelay,int,450000
+ControlCompDelay,int,0
+Throughput,int,450000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_HW_1
+A
+In
+11200
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_HW_1
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_HW_2
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Viterbi_Decoding_HW_2
+Viterbi_Decoding
+Hardware
+Function
+100
+1
+null
+300
+GenPCB
+null
+BaseCost,float,2.50
+Size,float,30000.0
+DataCompDelay,int,230000
+ControlCompDelay,int,0
+Throughput,int,230000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_HW_2
+A
+In
+11200
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_HW_2
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Block_Decoding_HW_1
+Block_Decoding
+Hardware
+Function
+100
+1
+null
+100
+GenPCB
+null
+BaseCost,float,0.80
+Size,float,10000.0
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Block_Decoding_HW_1
+A
+In
+1400
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Block_Decoding_HW_1
+Result
+Out
+1400
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                      EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+BB_BB_IF_Handling_and_DL_IF_Unit
+Hardware
+Function
+100
+1
+null
+50
+GenPCB
+null
+BaseCost,float,0.40
+Size,float,5000.0
+DataCompDelay,int,577000
+ControlCompDelay,int,0
+Throughput,int,577000
+OnChipMem,int,0
+ArchWidth,int,16
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+A
+In
+2800
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_BB_BB_IF_Handling_and_DL_IF_Unit_HW_1
+Result
+Out
+2800
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                  ARM_CortexA11-64
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+ARM_CortexA11-64
+ARM_CortexA11
+Hardware
+Processor
+100
+1
+98
+241
+GenPCB
+null
+BaseCost,float,25.29
+Size,float,121
+OnChipMem,int,64
+OnChipDataMem,int,0
+ArchWidth,int,16
+//
+// Port : Data
+//
+Port
+FuncBlk
+ARM_CortexA11-64
+Data
+Bi
+16
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                        TC554161
+// Comments : Standalone prepackaged CMOS memory chip from Toshiba (R)
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+TC554161
+Memory
+Hardware
+Memory
+100
+1
+100
+55
+GenPCB
+null
+BaseCost,float,8.25
+Size,float,266
+ReadDelay,int,35
+WriteDelay,int,70
+OnChipMem,int,4096
+ArchWidth,int,18
+//
+// Port : Data
+//
+Port
+FuncBlk
+TC554161
+Data
+Bi
+16
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                           Delay
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+Delay-1
+Delay
+Hardware
+Delay
+100
+1
+5
+5
+GenPCB
+null
+BaseCost,float,0.01
+Size,float,26
+DataCompDelay,int,0
+ControlCompDelay,int,0
+ReadDelay,int,1
+WriteDelay,int,0
+ArchWidth,int,3
+//
+// Port : Data
+//
+Port
+FuncBlk
+Delay-1
+A
+In
+3
+1
+PCBBus
+//
+// Port : Result
+//
+Port
+FuncBlk
+Delay-1
+Result
+Out
+3
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                          GenPCB   
+// ------------------------------------------------------------------------------- //
+Comp
+Platform
+GenPCB
+PCB
+null
+null
+BaseCost,float,2.00
+MaxSize,int,25000.00
+// ------------------------------------------------------------------------------- //
+//                                                                          PCBBus   
+// ------------------------------------------------------------------------------- //
+Comp
+Interface
+PCBBus
+GenPCB
+Bus
+BaseCost,float,0.02
+Width,int,16
+//
+// Port : Data
+//
+Port
+Interface
+PCBBus
+Data
+Bi
+16
+1
+PCBBus
+// ------------------------------------------------------------------------------- //
+//                                                                         PCBWire   
+// ------------------------------------------------------------------------------- //
+Comp
+Interface
+PCBWire
+GenPCB
+Wire
+BaseCost,float,0.02
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// Software functional block components
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// ------------------------------------------------------------------------------- //
+//                                                         EDGE_Conv_Encoding_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Conv_Encoding_SW_0
+Conv_Encoding
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_1400
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Conv_Encoding_SW_0
+A
+In
+1400
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Conv_Encoding_SW_0
+Result
+Out
+1400
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Encoding_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Block_Encoding_SW_0
+Block_Encoding
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_1400
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Block_Encoding_SW_0
+A
+In
+1400
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Block_Encoding_SW_0
+Result
+Out
+1400
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_Interleaving_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Interleaving_SW_0
+Interleaving
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_1000,MEM_DATA_1400
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,1400
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Interleaving_SW_0
+A
+In
+1400
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Interleaving_SW_0
+Result
+Out
+1400
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Burst_Formatting_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Burst_Formatting_SW_0
+Burst_Formatting
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_1400
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,1400
+DataCompDelay,int,6667
+ControlCompDelay,int,0
+Throughput,int,6667
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Burst_Formatting_SW_0
+A
+In
+1400
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Burst_Formatting_SW_0
+Result
+Out
+350
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                             EDGE_Ciphering_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Ciphering_SW_0
+Ciphering
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_2000,MEM_DATA_350
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,350
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Ciphering_SW_0
+A
+In
+350
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Ciphering_SW_0
+Result
+Out
+350
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Pre_Processing_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Pre_Processing_SW_0
+Pre_Processing
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_19200
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,13333
+ControlCompDelay,int,0
+Throughput,int,13333
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Pre_Processing_SW_0
+A
+In
+19200
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result1
+//
+Port
+FuncBlk
+EDGE_Pre_Processing_SW_0
+Result1
+Out
+19200
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result2
+//
+Port
+FuncBlk
+EDGE_Pre_Processing_SW_0
+Result2
+Out
+3300
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                     EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+Channel_Noise_Est_and_Blind_Detec
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_1000,MEM_DATA_3300
+BaseCost,float,0.00
+CodeSize,int,1000
+DataSize,int,3300
+DataCompDelay,int,10000
+ControlCompDelay,int,0
+Throughput,int,10000
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+A
+In
+3300
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result1
+//
+Port
+FuncBlk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+Result1
+Out
+250
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result2
+//
+Port
+FuncBlk
+EDGE_Channel_Noise_Est_and_Blind_Detec_SW_0
+Result2
+Out
+250
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                                   EDGE_AFC_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_AFC_SW_0
+AFC
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_1000,MEM_DATA_19200
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,19200
+DataCompDelay,int,16667
+ControlCompDelay,int,0
+Throughput,int,16667
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_AFC_SW_0
+A
+In
+19200
+1
+null
+ARM_CortexA11,Data
+//
+// Port : B
+//
+Port
+FuncBlk
+EDGE_AFC_SW_0
+B
+In
+250
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_AFC_SW_0
+Result
+Out
+19200
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                   EDGE_Pre_Tap_Calculation_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Pre_Tap_Calculation_SW_0
+Pre_Tap_Calculation
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_2000,MEM_DATA_250
+BaseCost,float,0.0
+CodeSize,int,2000
+DataSize,int,250
+DataCompDelay,int,66667
+ControlCompDelay,int,0
+Throughput,int,66667
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Pre_Tap_Calculation_SW_0
+A
+In
+250
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Pre_Tap_Calculation_SW_0
+Result
+Out
+900
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                                EDGE_Filter_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Filter_SW_0
+Filter
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_19200
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,19200
+DataCompDelay,int,213
+ControlCompDelay,int,0
+Throughput,int,213
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Filter_SW_0
+A
+In
+128
+1
+null
+ARM_CortexA11,Data
+//
+// Port : B
+//
+Port
+FuncBlk
+EDGE_Filter_SW_0
+B
+In
+6
+1
+null
+ARM_CortexA11,Data
+//
+// Port : C
+//
+Port
+FuncBlk
+EDGE_Filter_SW_0
+C
+In
+3
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Filter_SW_0
+Result
+Out
+64
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                              EDGE_Equalize_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Equalize_SW_0
+Equalize
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_1000,MEM_DATA_5000
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,128
+DataCompDelay,int,5000
+ControlCompDelay,int,0
+Throughput,int,5000
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Equalize_SW_0
+A
+In
+64
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Equalize_SW_0
+Result
+Out
+24
+1
+null
+ARM_CortexA11,Data
+// So far so good
+// ------------------------------------------------------------------------------- //
+//                                                          EDGE_DFE_Adaption_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_DFE_Adaption_SW_0
+DFE_Adaption
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_18
+BaseCost,float,0.0
+CodeSize,int,500
+DataSize,int,18
+DataCompDelay,int,250
+ControlCompDelay,int,0
+Throughput,int,25
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_SW_0
+A
+In
+24
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result1
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_SW_0
+Result1
+Out
+3
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result2
+//
+Port
+FuncBlk
+EDGE_DFE_Adaption_SW_0
+Result2
+Out
+18
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                           EDGE_Deciphering_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Deciphering_SW_0
+Deciphering
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_500,MEM_DATA_2800
+BaseCost,float,0.00
+CodeSize,int,500
+DataSize,int,2800
+DataCompDelay,int,100000
+ControlCompDelay,int,0
+Throughput,int,100000
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Deciphering_SW_0
+A
+In
+2800
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Deciphering_SW_0
+Result
+Out
+11200
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Deinterleaving_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Deinterleaving_SW_0
+Deinterleaving
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_1000,MEM_DATA_11200
+BaseCost,float,0.0
+CodeSize,int,1000
+DataSize,int,11200
+DataCompDelay,int,33333
+ControlCompDelay,int,0
+Throughput,int,33333
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Deinterleaving_SW_0
+A
+In
+11200
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Deinterleaving_SW_0
+Result
+Out
+11200
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                      EDGE_Viterbi_Decoding_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Viterbi_Decoding_SW_0
+Viterbi_Decoding
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_5000,MEM_DATA_11200
+BaseCost,float,0.0
+CodeSize,int,5000
+DataSize,int,11200
+DataCompDelay,int,2333333
+ControlCompDelay,int,0
+Throughput,int,2333333
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_SW_0
+A
+In
+11200
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Viterbi_Decoding_SW_0
+Result
+Out
+1400
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //
+//                                                        EDGE_Block_Decoding_SW_0
+// ------------------------------------------------------------------------------- //
+Comp
+FuncBlk
+EDGE_Block_Decoding_SW_0
+Block_Decoding
+Software
+Function
+null
+null
+null
+null
+Core
+ARM_CortexA11,MEM_CODE_2000,MEM_DATA_1400
+BaseCost,float,0.00
+CodeSize,int,2000
+DataSize,int,1400
+DataCompDelay,int,666667
+ControlCompDelay,int,0
+Throughput,int,666667
+//
+// Port : A
+//
+Port
+FuncBlk
+EDGE_Block_Decoding_SW_0
+A
+In
+1400
+1
+null
+ARM_CortexA11,Data
+//
+// Port : Result
+//
+Port
+FuncBlk
+EDGE_Block_Decoding_SW_0
+Result
+Out
+1400
+1
+null
+ARM_CortexA11,Data
+// ------------------------------------------------------------------------------- //

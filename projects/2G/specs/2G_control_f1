@@ -1,0 +1,61 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//  INSTRUCTIONS : Engine Control Parameters for Architecture Exploration
+//  AUTHOR       : Alan Su
+//  CONTACT      : alansuphd@gmail.com, +886 (0)3 576-1353
+//  UPDATED      : August 27th 2012
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Engine Control Parameters //
+   // 0. FIT_FUNC, fitness function setting, int. Inactivate
+   //    0: f0 = (alpha * 1/area + beta * 1/cost + gama * 1/power)
+   //    1: f1 = (alpha * area + beta * cost + gama * power)
+   //    2: f2 = 1 / (alpha * area + beta * cost + gama * power)
+   // 1. ACTIVE_NORM, normalizing flag setting, bool
+   // 2. alpha, for fitness computation, the weight of area
+   // 3. beta, for fitness computation, the weight of cost
+   // 4. gama, for fitness computation, the weight of power
+   // 5. margin, the convergence margin, the standard deviation of fitness values
+   // 6. POP_SIZE, the size of population of each generation
+   // 7. NO_GENERATION, the maximum generations to evolve
+   // 8. ASIC_COMP_METHOD, set wich method to compute ASIC, int. Inactivate
+   // 9. MAXGATECOUNT, maximum gate count of ASIC, int
+   // 10. ASIC_AREA, the normalized ASIC area, gate size maybe?
+   // 11. MEMCORE_AREA, the average embedded memory cell area, int
+   // 12. BUS_CLK_RATE, the system bus clock rate, float
+   // 13. BUS_WIDTH, the system bus width
+   // 14. DSP_UTIL_MARGIN, the maximum processor utilization, between 0.0001 and 0.9999
+   // 15. RAN_SEED, the seed for the random function
+// FIT_FUNC
+1
+// ACTIVE_NORM
+1
+// alpha
+0.8
+// beta
+0.9
+// gama
+0.4
+// margin
+0.0000001
+// POP_SIZE
+30
+// NO_GENERATION
+10000
+// ASIC_COMP_METHOD
+1
+// MAXGATECOUNT
+500000
+// ASIC_AREA
+200
+// MEMCORE_AREA
+160
+// BUS_CLK_RATE
+100.0
+// BUS_WIDTH
+16
+// DSP_UTIL_MARGIN
+0.8
+// RAN_SEED
+7238534
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
