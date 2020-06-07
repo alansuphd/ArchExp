@@ -1,0 +1,31 @@
+Version 0.4
+
+Implemented and tested:
+	Support multiple configuration of one processor family
+
+Platform	x86_64-redhat-linux
+OS		CentOS 6.10
+OS Kernel	
+Compiler	g++ 4.4.7 02120313 (Red Hat 4.4.7-23) (GCC)
+Processor	Intel Core i5, quad-core, 2.5GHz
+
+Bug fix:
+	1. share_mutate() is not executed in evolve.cpp.
+
+New features
+	1. Support multiple configurations of one processor family
+	   a. Different sizes of local memory
+	   b. Different clock rates
+	2. Support multiple taskgraphs
+
+Legacy features
+	1. SW/HW partitioning
+	2. task graph/architecture mapping & scheduling
+	3. Processor utilization analysis
+	4. Bus utilization analysis
+	5. System performance analysis
+	6. Automatic memory allocation
+	7. Task-Component mapping and schedule
+	8. Transaction-Interface mapping and schedule
+	9. user programmable cost functions
+	10. Complex systems, e.g. SoC, base station, network switch router
